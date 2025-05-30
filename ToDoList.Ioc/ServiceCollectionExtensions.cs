@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<DbConfig>(config => configuration.GetRequiredSection(nameof(DbConfig)));
+        services.Configure<DbConfig>(configuration.GetSection(nameof(DbConfig)));
 
         services.AddDbContext<ToDoListDbContext>((serviceProvider, options) =>
         {

@@ -1,10 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ToDoList.Shared.Configuration;
-using Microsoft.EntityFrameworkCore;
-using ToDoList.Database;
 using Microsoft.Extensions.Options;
-using System.Text;
+using System.Text.Json.Serialization;
+using ToDoList.Database;
+using ToDoList.Database.Repository;
+using ToDoList.Domain.Interfaces;
+using ToDoList.Shared.Configuration;
+
 
 namespace ToDoList.Ioc;
 
@@ -13,6 +16,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext(configuration);
+        services.AddApplicationServices(configuration);
 
         return services;
     }
@@ -31,4 +35,11 @@ public static class ServiceCollectionExtensions
         });
         return services;
     }
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<ITarefaRepository, TarefaRepository>();
+
+        return services;
+    }
+
 }

@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Database", "ToDoLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Ioc", "ToDoList.Ioc\ToDoList.Ioc.csproj", "{6C4AD199-7A2F-4033-9A75-5E0D93E78D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{B64391E1-4C9D-4C54-941D-329901962197}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{B64391E1-4C9D-4C54-941D-329901962197}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2D8A8522-6941-4C84-A41F-3A79EA791E77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Shared", "ToDoList.Shared\ToDoList.Shared.csproj", "{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Shared", "ToDoList.Shared\ToDoList.Shared.csproj", "{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

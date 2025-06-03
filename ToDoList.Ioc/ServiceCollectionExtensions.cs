@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext(configuration);
         services.AddApplicationServices(configuration);
+        services.AddRepositoryServices(configuration);
 
         return services;
     }
@@ -42,4 +43,9 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    public static IServiceCollection AddRepositoryServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+        return services;
+    }
 }

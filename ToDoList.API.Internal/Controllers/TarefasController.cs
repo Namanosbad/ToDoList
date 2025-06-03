@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ToDoList.Database.Repository;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Domain.Entities;
 using ToDoList.Domain.Interfaces;
 
@@ -10,26 +8,83 @@ namespace ToDoList.API.Internal.Controllers
     [ApiController]
     public class TarefasController : ControllerBase
     {
-        private readonly ITarefaRepository _tarefasRepository;
+        private readonly IRepository<Tarefa> _repo;
 
-        public TarefasController(ITarefaRepository tarefasRepository)
+        public TarefasController(IRepository<Tarefa> repo)
         {
-            _tarefasRepository = tarefasRepository;
+            _repo = repo;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Listar()
+        public async Task<IActionResult> GetAll()
+            => Ok(await _repo.GetAllAsync());
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var tarefas = await _tarefasRepository.ListarAsync();
-            return Ok(tarefas);
+            var tarefa = await _repo.GetByIdAsync(id);
+            return tarefa is null ? NotFound() : Ok(tarefa);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] Tarefa tarefa)
+        public async Task<IActionResult> Create([FromBody] Tarefa tarefa)
         {
-            await _tarefasRepository.AddAsync(tarefa);
-            return CreatedAtAction(nameof(Listar), new { id = tarefa.Id }, tarefa);
+            var result = await _repo.AddAsync(tarefa);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
-    } 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] Tarefa tarefa)
+        {
+            if (id != tarefa.Id) return BadRequest("Id do corpo não corresponde ao da URL.");
+            if (!await _repo.ExistsAsync(id)) return NotFound();
+
+            await _repo.UpdateAsync(tarefa);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (!await _repo.ExistsAsync(id)) return NotFound();
+
+            await _repo.DeleteAsync(id);
+            return NoContent();
+        }
+
+        [HttpPost("{id}/em-progresso")]
+        public async Task<IActionResult> MarcarEmProgresso(Guid id)
+        {
+            var tarefa = await _repo.GetByIdAsync(id);
+            if (tarefa == null) return NotFound();
+
+            tarefa.EmProgresso();
+            await _repo.UpdateAsync(tarefa);
+            return NoContent();
+        }
+
+        [HttpPost("{id}/concluir")]
+        public async Task<IActionResult> MarcarComoConcluida(Guid id)
+        {
+            var tarefa = await _repo.GetByIdAsync(id);
+            if (tarefa == null) return NotFound();
+
+            tarefa.Concluido();
+            await _repo.UpdateAsync(tarefa);
+            return NoContent();
+        }
+
+        [HttpPost("{id}/cancelar")]
+        public async Task<IActionResult> Cancelar(Guid id)
+        {
+            var tarefa = await _repo.GetByIdAsync(id);
+            if (tarefa == null) return NotFound();
+
+            tarefa.Cancelar();
+            await _repo.UpdateAsync(tarefa);
+            return NoContent();
+        }
+
+
+    }
 }

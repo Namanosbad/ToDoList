@@ -1,16 +1,21 @@
-﻿using ToDoList.Domain.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using ToDoList.Domain.Enums;
+using ToDoList.Domain.Interfaces;
 
 namespace ToDoList.Domain.Entities
 {
-    public class Tarefa
+    public class Tarefa : IEntity
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Titulo { get; set; }
 
         public string? Descricao { get; set; }
 
-        public DateTime? Data { get; set; }
+        public DateTime DataCriacao { get; private set; } = DateTime.UtcNow;
+
+        public DateTime? DataConclusao { get; private set; }
 
         public EStatus Status { get; set; } = EStatus.Pendente;
 
@@ -24,6 +29,7 @@ namespace ToDoList.Domain.Entities
         {
             if (Status == EStatus.EmProgresso)
                 Status = EStatus.Concluido;
+                DataConclusao = DateTime.UtcNow;
         }
 
         public void Cancelar()
@@ -31,5 +37,6 @@ namespace ToDoList.Domain.Entities
             if (Status != EStatus.Concluido)
                 Status = EStatus.Cancelado;
         }
+
     }
 }

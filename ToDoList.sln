@@ -17,11 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Database", "ToDoLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Ioc", "ToDoList.Ioc\ToDoList.Ioc.csproj", "{6C4AD199-7A2F-4033-9A75-5E0D93E78D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{B64391E1-4C9D-4C54-941D-329901962197}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{B64391E1-4C9D-4C54-941D-329901962197}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2D8A8522-6941-4C84-A41F-3A79EA791E77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Shared", "ToDoList.Shared\ToDoList.Shared.csproj", "{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Shared", "ToDoList.Shared\ToDoList.Shared.csproj", "{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{86A13888-1DD4-40F6-AD4B-529E7A05CB36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "ToDoList.Application\ToDoList.Application.csproj", "{56F30F13-B7A8-4C7F-90C8-C231C0520A1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2D7F43B-326E-4A34-B0AE-A298B628F6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56F30F13-B7A8-4C7F-90C8-C231C0520A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F30F13-B7A8-4C7F-90C8-C231C0520A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F30F13-B7A8-4C7F-90C8-C231C0520A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F30F13-B7A8-4C7F-90C8-C231C0520A1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{6C4AD199-7A2F-4033-9A75-5E0D93E78D45} = {B0F48B83-902D-42F4-972A-3D208F87AD62}
 		{B64391E1-4C9D-4C54-941D-329901962197} = {E22433A7-EB3A-4155-9E4B-D6A8DB8F20F3}
 		{B2D7F43B-326E-4A34-B0AE-A298B628F6ED} = {2D8A8522-6941-4C84-A41F-3A79EA791E77}
+		{56F30F13-B7A8-4C7F-90C8-C231C0520A1F} = {86A13888-1DD4-40F6-AD4B-529E7A05CB36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46028D40-2461-4604-B64F-E5519AD08729}

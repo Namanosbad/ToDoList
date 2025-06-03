@@ -13,7 +13,8 @@ namespace ToDoList.Database.EntitiesConfiguration
             builder.HasKey(t => t.Id);
 
             builder.Property(t => t.Id)
-                   .IsRequired();
+                   .IsRequired()
+                   .ValueGeneratedOnAdd();
 
             builder.Property(t => t.Titulo)
                    .HasMaxLength(200);
@@ -21,7 +22,10 @@ namespace ToDoList.Database.EntitiesConfiguration
             builder.Property(t => t.Descricao)
                    .HasMaxLength(1000);
 
-            builder.Property(t => t.Data);
+            builder.Property(t => t.DataCriacao)
+                    .IsRequired();
+
+            builder.Property(t => t.DataConclusao);
 
             builder.Property(t => t.Status)
                    .HasConversion<string>()

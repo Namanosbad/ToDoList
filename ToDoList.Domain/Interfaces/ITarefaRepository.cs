@@ -1,9 +1,9 @@
-﻿using System.Security.Principal;
-using ToDoList.Domain.Entities;
+﻿using ToDoList.Domain.Entities;
 
-namespace ToDoList.Domain.Interfaces
+namespace ToDoList.Domain.Interfaces;
+
+public interface ITarefaRepository
 {
-    public interface ITarefaRepository
-    {
-    }
+    Task<Tarefa?> ObterPorIdAsync(Guid id);
+    Task AtualizarAsync(Tarefa tarefa);
 }

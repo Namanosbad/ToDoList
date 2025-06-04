@@ -5,11 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Requests\" />
-    <Folder Include="Responses\" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ToDoList.Domain\ToDoList.Domain.csproj" />
+	</ItemGroup>
 
 </Project>

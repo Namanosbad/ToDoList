@@ -84,7 +84,5 @@ namespace ToDoList.API.Internal.Controllers
             await _repo.UpdateAsync(tarefa);
             return NoContent();
         }
-
-
     }
 }

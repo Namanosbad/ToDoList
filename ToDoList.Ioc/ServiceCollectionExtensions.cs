@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
+using ToDoList.Application.Interfaces;
+using ToDoList.Application.Services;
 using ToDoList.Database;
 using ToDoList.Database.Repository;
 using ToDoList.Domain.Interfaces;
@@ -33,13 +35,16 @@ public static class ServiceCollectionExtensions
             var connectionString = config.ConnectionString;
 
             options.UseSqlServer(connectionString);
+
+    
         });
         return services;
     }
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<ITarefaRepository, TarefaRepository>();
-
+        services.AddScoped<ITarefaService, TarefaService>();
+        services.AddScoped<ITarefaRepository, TarefaRepository>();
         return services;
     }
 

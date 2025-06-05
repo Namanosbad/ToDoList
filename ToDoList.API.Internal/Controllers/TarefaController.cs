@@ -26,6 +26,5 @@ namespace ToDoList.API.Internal.Controllers
             var resultado = await _tarefaService.AlterarStatusAsync(request);
             return Ok(resultado);
         }
-
     }
 }

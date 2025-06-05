@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoList.Application.Interfaces;
+﻿using ToDoList.Application.Interfaces;
 using ToDoList.Application.Requests;
 using ToDoList.Application.Responses;
 using ToDoList.Domain.Enums;
@@ -38,9 +33,6 @@ namespace ToDoList.Application.Services
                 case EStatus.Concluido:
                     tarefa.Concluido();
                     break;
-                case EStatus.Cancelado:
-                    tarefa.Cancelar();
-                    break;
                 default:
                     throw new InvalidOperationException("Status inválido para alteração");
             }
@@ -55,6 +47,5 @@ namespace ToDoList.Application.Services
                 DataConclusao = (DateTime)tarefa.DataConclusao
             };
         }
-
     }
 }

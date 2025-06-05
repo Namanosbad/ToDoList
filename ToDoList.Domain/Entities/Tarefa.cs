@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using ToDoList.Domain.Enums;
+﻿using ToDoList.Domain.Enums;
 using ToDoList.Domain.Interfaces;
 
 namespace ToDoList.Domain.Entities

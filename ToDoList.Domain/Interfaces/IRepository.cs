@@ -1,6 +1,4 @@
-﻿using System.Security.Principal;
-
-namespace ToDoList.Domain.Interfaces
+﻿namespace ToDoList.Domain.Interfaces
 {
 
     public interface IRepository<TEntity>

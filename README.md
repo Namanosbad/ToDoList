@@ -1,25 +1,31 @@
 
-# ToDoList API
+# 📝 ToDoList API
 
-Este é um projeto ASP.NET Core que implementa uma API RESTful para gerenciamento de tarefas (ToDoList), estrutura em camadas e uso de repositórios genéricos e específicos.
+Uma API RESTful desenvolvida com ASP.NET Core para gerenciamento de tarefas. Organize, acompanhe e conclua suas tarefas com eficiência! 🚀
 
-## Funcionalidades
+---
 
-- CRUD completo de tarefas
-- Alteração de status de tarefas com regras de negócio
-- Enum `EStatus` para controle de status (`Pendente`, `EmProgresso`, `Concluido`, `Cancelado`)
-- Camada de serviço (`TarefaService`) com lógica específica
-- Repository pattern com EF Core
-- Estrutura organizada em camadas: `API`, `Application`, `Domain`, `Database`, `Ioc`
+## 📌 Funcionalidades
 
-## Tecnologias
+✅ CRUD completo de tarefas  
+🔁 Alteração de status com lógica de negócio  
+📊 Enum `EStatus` para status (`Pendente`, `EmProgresso`, `Concluido`, `Cancelado`)  
+🧠 Camada de serviço com regras específicas  
+🗃️ Repository pattern com Entity Framework  
+🔒 Autenticação integrada via Windows
+
+---
+
+## 🛠️ Tecnologias Utilizadas
 
 - ASP.NET Core 8
 - Entity Framework Core
 - SQL Server
 - C# 12
 
-## Estrutura do Projeto
+---
+
+## 📁 Estrutura do Projeto
 
 ```
 ToDoList/
@@ -40,15 +46,17 @@ ToDoList/
 │   └── ServiceCollectionExtensions.cs
 ```
 
-## Endpoints Principais
+---
 
-### Tarefas (TarefaController)
+## 🔗 Endpoints Principais
+
+### 🎯 Tarefas (TarefaController)
 
 - `PATCH /api/tarefa/alterar-status` — Altera o status de uma tarefa
 - `GET /api/tarefa/{id}` — Obtém tarefa por ID
 - `POST /api/tarefa` — Cria nova tarefa
 
-### CRUD Genérico (GenericTarefaController)
+### 📦 CRUD Genérico (GenericTarefaController)
 
 - `GET /api/tarefas`
 - `GET /api/tarefas/{id}`
@@ -56,11 +64,13 @@ ToDoList/
 - `PUT /api/tarefas/{id}`
 - `DELETE /api/tarefas/{id}`
 
-## Como Executar
+---
+
+## ▶️ Como Executar
 
 1. Configure o `appsettings.json` com sua `ConnectionString`.
-2. Execute as migrations do EF Core se necessário.
-3. Rode o projeto via Visual Studio ou CLI:
+2. Aplique as migrations do EF Core, se necessário.
+3. Execute o projeto:
 
 ```bash
 dotnet run --project ToDoList.API
@@ -68,6 +78,6 @@ dotnet run --project ToDoList.API
 
 ---
 
-## Autor
+## 👨‍💻 Autor
 
-Desenvolvido por [Namanosbad].
+Desenvolvido com 💙 por **Namanosbad**

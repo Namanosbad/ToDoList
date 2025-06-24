@@ -7,15 +7,9 @@ namespace ToDoList.Database.Repository
     {
         private readonly ToDoListDbContext _context;
 
-        public TarefaRepository(ToDoListDbContext context) : base(context)
-        {
-            _context = context;
-        }
+        public TarefaRepository(ToDoListDbContext context) : base(context) => _context = context;
 
-        public async Task<Tarefa?> ObterPorIdAsync(Guid id)
-        {
-            return await _context.Tarefas.FindAsync(id);
-        }
+        public async Task<Tarefa?> ObterPorIdAsync(Guid id) => await _context.Tarefas.FindAsync(id);
 
         public async Task AtualizarAsync(Tarefa tarefa)
         {

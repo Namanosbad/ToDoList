@@ -1,23 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Domain.Entities;
 using ToDoList.Domain.Interfaces;
 
-namespace ToDoList.API.Internal.Controllers
+namespace ToDoList.API.Internal.Controllers.v1
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class TarefaCrudController : ControllerBase
     {
         private readonly IRepository<Tarefa> _repo;
 
-        public TarefaCrudController(IRepository<Tarefa> repo)
-        {
-            _repo = repo;
-        }
+        public TarefaCrudController(IRepository<Tarefa> repo) => _repo = repo;
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
-            => Ok(await _repo.GetAllAsync());
+        public async Task<IActionResult> GetAll() => Ok(await _repo.GetAllAsync());
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)

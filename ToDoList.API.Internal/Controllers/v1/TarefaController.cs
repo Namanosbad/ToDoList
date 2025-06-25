@@ -14,12 +14,18 @@ namespace ToDoList.API.Internal.Controllers.v1
     {
         private readonly ITarefaService _tarefaService;
 
-        public TarefaController(ITarefaService tarefaService)
-        {
-            _tarefaService = tarefaService;
-        }
+        public TarefaController(ITarefaService tarefaService) => _tarefaService = tarefaService;
 
+        /// <summary>
+        /// Altera o status de uma tarefa (ex: Em Progresso, Concluído).
+        /// </summary>
+        /// <param name="id">ID da tarefa a ser atualizada.</param>
+        /// <param name="request">Dados da nova alteração de status.</param>
+        /// <returns>Status 200 com o resultado da alteração ou erro 400 se o ID não coincidir.</returns>
         [HttpPatch("{id}/status")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> AlterarStatus(Guid id, [FromBody] AlterarStatusRequest request)
         {
             if (id != request.Id)

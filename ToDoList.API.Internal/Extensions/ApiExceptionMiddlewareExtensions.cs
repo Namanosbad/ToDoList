@@ -18,7 +18,8 @@ namespace ToDoList.API.Internal.Extensions
 
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
 
-                    if (contextFeature != null) {
+                    if (contextFeature != null)
+                    {
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,

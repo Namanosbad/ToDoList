@@ -26,11 +26,10 @@ namespace ToDoList.Database.Repository
             {
                 Id = Guid.NewGuid()
             };
-                _dbSet.Add(entity);
+            _dbSet.Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
-
         public async Task UpdateAsync(TEntity entity)
         {
             _dbSet.Update(entity);
@@ -51,7 +50,5 @@ namespace ToDoList.Database.Repository
             var entity = await _dbSet.FindAsync(id);
             return entity != null;
         }
-
     }
-
 }

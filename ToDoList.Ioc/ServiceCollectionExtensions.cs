@@ -10,7 +10,6 @@ using ToDoList.Database.Repository;
 using ToDoList.Domain.Interfaces;
 using ToDoList.Shared.Configuration;
 
-
 namespace ToDoList.Ioc;
 
 public static class ServiceCollectionExtensions

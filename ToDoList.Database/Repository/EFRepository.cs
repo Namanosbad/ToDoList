@@ -6,7 +6,7 @@ namespace ToDoList.Database.Repository
 {
     public class EFRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        private readonly ToDoListDbContext _context;
+        protected readonly ToDoListDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
         public EFRepository(ToDoListDbContext context)
         {
@@ -16,11 +16,9 @@ namespace ToDoList.Database.Repository
         public DbSet<TEntity> Repositories => _context.Set<TEntity>();
         DbSet<TEntity> Entities { get; }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-    => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
 
-        public async Task<TEntity?> GetByIdAsync(Guid id)
-            => await _dbSet.FindAsync(id);
+        public async Task<TEntity?> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
@@ -28,11 +26,10 @@ namespace ToDoList.Database.Repository
             {
                 Id = Guid.NewGuid()
             };
-                _dbSet.Add(entity);
+            _dbSet.Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
-
         public async Task UpdateAsync(TEntity entity)
         {
             _dbSet.Update(entity);
@@ -53,7 +50,5 @@ namespace ToDoList.Database.Repository
             var entity = await _dbSet.FindAsync(id);
             return entity != null;
         }
-
     }
-
 }

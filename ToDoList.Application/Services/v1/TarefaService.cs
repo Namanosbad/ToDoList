@@ -4,17 +4,14 @@ using ToDoList.Application.Responses;
 using ToDoList.Domain.Enums;
 using ToDoList.Domain.Interfaces;
 
-namespace ToDoList.Application.Services
+namespace ToDoList.Application.Services.v1
 {
     public class TarefaService : ITarefaService
     {
 
         private readonly ITarefaRepository _tarefaRepository;
 
-        public TarefaService(ITarefaRepository tarefaRepository)
-        {
-            _tarefaRepository = tarefaRepository;
-        }
+        public TarefaService(ITarefaRepository tarefaRepository) => _tarefaRepository = tarefaRepository;
 
         public async Task<AlterarStatusResponse> AlterarStatusAsync(AlterarStatusRequest request)
         {

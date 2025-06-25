@@ -1,7 +1,5 @@
-﻿namespace ToDoList.Shared.Configuration
+﻿namespace ToDoList.Shared.Configuration;
+public class DbConfig
 {
-    public class DbConfig
-    {
-        public string ConnectionString { get; set; } = string.Empty;
-    }
+    public string ConnectionString { get; set; } = string.Empty;
 }

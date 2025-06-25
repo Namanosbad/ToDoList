@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Asp.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ToDoList.Application.Interfaces;
-using ToDoList.Application.Services;
+using ToDoList.Application.Services.v1;
 using ToDoList.Database;
 using ToDoList.Database.Repository;
 using ToDoList.Domain.Interfaces;
 using ToDoList.Shared.Configuration;
-
 
 namespace ToDoList.Ioc;
 
@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
         services.AddDbContext(configuration);
         services.AddApplicationServices(configuration);
         services.AddRepositoryServices(configuration);
-
+        services.AddApiVersioning(configuration);
         return services;
     }
 
@@ -35,7 +35,7 @@ public static class ServiceCollectionExtensions
 
             options.UseSqlServer(connectionString);
 
-    
+
         });
         return services;
     }
@@ -50,6 +50,25 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddRepositoryServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+        return services;
+    }
+
+    public static IServiceCollection AddApiVersioning(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddApiVersioning(o =>
+        {
+            o.DefaultApiVersion = new ApiVersion(1, 0);
+            o.AssumeDefaultVersionWhenUnspecified = true;
+            o.ReportApiVersions = true;
+            o.ApiVersionReader = ApiVersionReader.Combine(
+                                 new QueryStringApiVersionReader(),
+                                 new UrlSegmentApiVersionReader());
+
+        }).AddApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'VVV";
+            options.SubstituteApiVersionInUrl = true;
+        });
         return services;
     }
 }

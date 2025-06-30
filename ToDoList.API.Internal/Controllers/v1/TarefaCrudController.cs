@@ -8,27 +8,37 @@ namespace ToDoList.API.Internal.Controllers.v1
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
+    [Produces("application/json")]
     public class TarefaCrudController : ControllerBase
     {
         private readonly IRepository<Tarefa> _repo;
-
         public TarefaCrudController(IRepository<Tarefa> repo) => _repo = repo;
 
         /// <summary>
         /// Retorna todas as tarefas.
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetAll() => Ok(await _repo.GetAllAsync());
+        public async Task<IActionResult> GetAll()
+        {
+            var tarefa = await _repo.GetAllAsync();
+            return Ok(tarefa);
+        }
 
         /// <summary>
         /// Retorna uma tarefa pelo ID.
         /// </summary>
         /// <param name="id">ID da tarefa.</param>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> GetById(Guid id)
         {
             var tarefa = await _repo.GetByIdAsync(id);
-            return tarefa is null ? NotFound() : Ok(tarefa);
+            if (tarefa == null)
+            {
+                return NotFound();
+            }else { return Ok(tarefa); }
         }
 
         /// <summary>
@@ -38,6 +48,7 @@ namespace ToDoList.API.Internal.Controllers.v1
         /// <returns>Tarefa criada com localizador.</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Create([FromBody] Tarefa tarefa)
         {
@@ -58,8 +69,15 @@ namespace ToDoList.API.Internal.Controllers.v1
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Update(Guid id, [FromBody] Tarefa tarefa)
         {
-            if (id != tarefa.Id) return BadRequest("Id do corpo não corresponde ao da URL.");
-            if (!await _repo.ExistsAsync(id)) return NotFound();
+            if (id != tarefa.Id)
+            {
+                return BadRequest("Id do corpo não corresponde ao da URL.");
+            }
+
+            if (!await _repo.ExistsAsync(id))
+            {
+                return NotFound();
+            }
 
             await _repo.UpdateAsync(tarefa);
             return NoContent();
@@ -76,7 +94,10 @@ namespace ToDoList.API.Internal.Controllers.v1
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Delete(Guid id)
         {
-            if (!await _repo.ExistsAsync(id)) return NotFound();
+            if (!await _repo.ExistsAsync(id))
+            {
+                return NotFound();
+            }
 
             await _repo.DeleteAsync(id);
             return NoContent();

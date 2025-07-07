@@ -9,10 +9,9 @@ namespace ToDoList.API.Internal.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [Produces("application/json")]
-    public class TarefaCrudController : ControllerBase
+    public class TarefaCrudController(IRepository<Tarefa> repo) : ControllerBase
     {
-        private readonly IRepository<Tarefa> _repo;
-        public TarefaCrudController(IRepository<Tarefa> repo) => _repo = repo;
+        private readonly IRepository<Tarefa> _repo = repo;
 
         /// <summary>
         /// Retorna todas as tarefas.
@@ -28,7 +27,7 @@ namespace ToDoList.API.Internal.Controllers.v1
         /// Retorna uma tarefa pelo ID.
         /// </summary>
         /// <param name="id">ID da tarefa.</param>
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -62,7 +61,7 @@ namespace ToDoList.API.Internal.Controllers.v1
         /// <param name="id">ID da tarefa.</param>
         /// <param name="tarefa">Dados atualizados da tarefa.</param>
         /// <returns>NoContent se atualizado, BadRequest se IDs não coincidem, NotFound se não existir.</returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -88,7 +87,7 @@ namespace ToDoList.API.Internal.Controllers.v1
         /// </summary>
         /// <param name="id">ID da tarefa.</param>
         /// <returns>NoContent se excluída, NotFound se não existir.</returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]

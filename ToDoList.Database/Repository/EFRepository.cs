@@ -16,7 +16,7 @@ namespace ToDoList.Database.Repository
         public DbSet<TEntity> Repositories => _context.Set<TEntity>();
         DbSet<TEntity> Entities { get; }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
 
         public async Task<TEntity?> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
 

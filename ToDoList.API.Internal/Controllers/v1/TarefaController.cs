@@ -23,7 +23,7 @@ namespace ToDoList.API.Internal.Controllers.v1
         /// <param name="id">ID da tarefa a ser atualizada.</param>
         /// <param name="request">Dados da nova alteração de status.</param>
         /// <returns>Status 200 com o resultado da alteração ou erro 400 se o ID não coincidir.</returns>
-        [HttpPatch("{id}/status")]
+        [HttpPatch("{id:guid}/status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]

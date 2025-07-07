@@ -41,7 +41,7 @@ namespace ToDoList.Application.Services.v1
                 Id = tarefa.Id,
                 StatusAtual = tarefa.Status,
                 Titulo = tarefa.Titulo,
-                DataConclusao = (DateTime)tarefa.DataConclusao
+                DataConclusao = tarefa.DataConclusao
             };
         }
     }

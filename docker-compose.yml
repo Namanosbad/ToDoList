@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "StrongPass!123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "14330:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    networks:
+      - todonet
+
+  todolist.api.internal:
+    build:
+      context: .
+      dockerfile: ToDoList.API.Internal/Dockerfile
+    container_name: todolist.api.internal
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - sqlserver
+    networks:
+      - todonet
+    environment: 
+    - ASPNETCORE_ENVIRONMENT=Development
+
+volumes:
+  sqlserverdata:
+
+networks:
+  todonet:

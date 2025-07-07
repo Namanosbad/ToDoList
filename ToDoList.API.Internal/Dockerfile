@@ -31,5 +31,5 @@ COPY --from=publish /app/publish .
 
 # Expor porta
 EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080;https://+:8081
+ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "ToDoList.API.Internal.dll"]

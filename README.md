@@ -1,83 +1,58 @@
-
 # 📝 ToDoList API
 
-Uma API RESTful desenvolvida com ASP.NET Core para gerenciamento de tarefas. Organize, acompanhe e conclua suas tarefas com eficiência! 🚀
-
----
+Uma API RESTful em ASP.NET Core para gerenciamento de tarefas.
 
 ## 📌 Funcionalidades
 
-✅ CRUD completo de tarefas  
-🔁 Alteração de status com lógica de negócio  
-📊 Enum `EStatus` para status (`Pendente`, `EmProgresso`, `Concluido`, `Cancelado`)  
-🧠 Camada de serviço com regras específicas  
-🗃️ Repository pattern com Entity Framework  
-🔒 Autenticação integrada via Windows
+- CRUD completo de tarefas.
+- Alteração de status com regras de negócio.
+- Enum `EStatus` (`Pendente`, `EmProgresso`, `Concluido`, `Cancelado`).
+- Camadas separadas por responsabilidade (API, Application, Domain, Database, IoC).
+- Swagger habilitado para documentação e testes de endpoint.
 
----
-
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias
 
 - ASP.NET Core 8
 - Entity Framework Core
 - SQL Server
 - C# 12
 
----
+## 📁 Estrutura do projeto
 
-## 📁 Estrutura do Projeto
-
-```
+```text
 ToDoList/
-├── API/
-│   └── Controllers/
-├── Application/
-│   ├── Services/
-│   ├── Interfaces/
-│   ├── Requests/Responses
-├── Domain/
-│   ├── Entities/
-│   ├── Enums/
-│   └── Interfaces/
-├── Database/
-│   ├── Repository/
-│   └── Context/
-├── Ioc/
-│   └── ServiceCollectionExtensions.cs
+├── ToDoList.API.Internal/
+├── ToDoList.Application/
+├── ToDoList.Domain/
+├── ToDoList.Database/
+├── ToDoList.Ioc/
+└── ToDoList.Shared/
 ```
 
----
+## 🔗 Endpoints principais (v1)
 
-## 🔗 Endpoints Principais
+### Alteração de status
 
-### 🎯 Tarefas (TarefaController)
+- `PATCH /api/v1/Tarefa/{id}/status`
 
-- `PATCH /api/tarefa/alterar-status` — Altera o status de uma tarefa
-- `GET /api/tarefa/{id}` — Obtém tarefa por ID
-- `POST /api/tarefa` — Cria nova tarefa
+### CRUD de tarefas
 
-### 📦 CRUD Genérico (GenericTarefaController)
+- `GET /api/v1/TarefaCrud`
+- `GET /api/v1/TarefaCrud/{id}`
+- `POST /api/v1/TarefaCrud`
+- `PUT /api/v1/TarefaCrud/{id}`
+- `DELETE /api/v1/TarefaCrud/{id}`
 
-- `GET /api/tarefas`
-- `GET /api/tarefas/{id}`
-- `POST /api/tarefas`
-- `PUT /api/tarefas/{id}`
-- `DELETE /api/tarefas/{id}`
+## ▶️ Como executar
 
----
-
-## ▶️ Como Executar
-
-1. Configure o `appsettings.json` com sua `ConnectionString`.
-2. Aplique as migrations do EF Core, se necessário.
-3. Execute o projeto:
+1. Configure o `DbConfig:ConnectionString` nos `appsettings`.
+2. (Opcional) aplique as migrations.
+3. Execute a API:
 
 ```bash
-dotnet run --project ToDoList.API
+dotnet run --project ToDoList.API.Internal
 ```
-
----
 
 ## 👨‍💻 Autor
 
-Desenvolvido com 💙 por **Namanosbad**
+Desenvolvido com 💙 por **Namanosbad**.

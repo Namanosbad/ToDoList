@@ -1,4 +1,4 @@
-﻿using Asp.Versioning;
+using Asp.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +17,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext(configuration);
-        services.AddApplicationServices(configuration);
-        services.AddRepositoryServices(configuration);
-        services.AddApiVersioning(configuration);
+        services.AddApplicationServices();
+        services.AddRepositoryServices();
+        services.AddApiVersioning();
+
         return services;
     }
 
@@ -30,45 +31,42 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<ToDoListDbContext>((serviceProvider, options) =>
         {
             var config = serviceProvider.GetRequiredService<IOptions<DbConfig>>().Value;
-
-            var connectionString = config.ConnectionString;
-
-            options.UseSqlServer(connectionString);
-
-
+            options.UseSqlServer(config.ConnectionString);
         });
+
         return services;
     }
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
+
+    private static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<ITarefaRepository, TarefaRepository>();
         services.AddScoped<ITarefaService, TarefaService>();
-        services.AddScoped<ITarefaRepository, TarefaRepository>();
+
         return services;
     }
 
-    public static IServiceCollection AddRepositoryServices(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddRepositoryServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
         return services;
     }
 
-    public static IServiceCollection AddApiVersioning(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddApiVersioning(this IServiceCollection services)
     {
-        services.AddApiVersioning(o =>
+        services.AddApiVersioning(options =>
         {
-            o.DefaultApiVersion = new ApiVersion(1, 0);
-            o.AssumeDefaultVersionWhenUnspecified = true;
-            o.ReportApiVersions = true;
-            o.ApiVersionReader = ApiVersionReader.Combine(
-                                 new QueryStringApiVersionReader(),
-                                 new UrlSegmentApiVersionReader());
-
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = ApiVersionReader.Combine(
+                new QueryStringApiVersionReader(),
+                new UrlSegmentApiVersionReader());
         }).AddApiExplorer(options =>
         {
             options.GroupNameFormat = "'v'VVV";
             options.SubstituteApiVersionInUrl = true;
         });
+
         return services;
     }
 }

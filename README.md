@@ -43,6 +43,14 @@ ToDoList/
 - `PUT /api/v1/TarefaCrud/{id}`
 - `DELETE /api/v1/TarefaCrud/{id}`
 
+
+## ⚙️ Connection string por ambiente
+
+- **Rodando API localmente (`dotnet run` / Visual Studio) + SQL no Docker**: a connection string é injetada via `launchSettings.json` com `Server=localhost,14330`.
+- **Rodando API dentro do `docker compose`**: a connection string vem de `docker-compose.yml` com `Server=sqlserver,1433`.
+
+> O host `sqlserver` só existe dentro da rede Docker Compose. Fora do container, use `localhost` com a porta publicada (`14330`).
+
 ## ▶️ Como executar
 
 1. Configure o `DbConfig:ConnectionString` nos `appsettings`.
